@@ -1,0 +1,54 @@
+﻿  main.cpp
+D:\directory\Software_architecture\Software_architecture\main.cpp(17,61): warning C4244: аргумент: преобразование "double" в "unsigned int", возможна потеря данных
+D:\directory\Software_architecture\Software_architecture\main.cpp(17,43): warning C4244: аргумент: преобразование "double" в "unsigned int", возможна потеря данных
+D:\directory\Software_architecture\Software_architecture\main.cpp(29,32): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(30,39): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(30,32): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(35,28): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(36,38): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(36,19): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(42,80): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(42,45): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(43,95): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\directory\Software_architecture\Software_architecture\main.cpp(43,52): warning C4244: аргумент: преобразование "double" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  Software_architecture.vcxproj -> D:\directory\Software_architecture\x64\Debug\Software_architecture.exe
