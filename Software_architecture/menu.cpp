@@ -29,7 +29,7 @@ void menu::choice()
 {
 	while (this->work_process) {
 		int CHOICE;
-		std::cout << "Choose action from list:\n1.Generate\n2.Calculate\n3.Save\n4.Download\n5.Display the table\n6.Display a graph\n7.Quit\n";
+		std::cout << "Choose action from list:\n1.Generate\n2.Calculate\n3.Save\n4.Download\n5.Display the table\n6.Display a plot\n7.Quit\n";
 		std::cin >> CHOICE;
 		switch (CHOICE)
 		{

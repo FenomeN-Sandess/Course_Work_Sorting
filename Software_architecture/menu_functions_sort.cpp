@@ -29,6 +29,8 @@ void sorting::bubble_sorting(std::vector <float> vector)
 	}
 }
 
+
+// Сортировка кучами
 void heapify(std::vector<float>& arr, int n, int i) {
 
     int largest = i;
