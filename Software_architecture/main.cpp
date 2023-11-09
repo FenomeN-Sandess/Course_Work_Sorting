@@ -1,8 +1,4 @@
-﻿#include <iostream>
-#include <string>
-#include <vector>
-#include <iomanip>
-#include "classes.h"
+﻿#include "classes.h"
 #include <SFML/Graphics.hpp>
 
 

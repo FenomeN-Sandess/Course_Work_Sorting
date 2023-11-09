@@ -9,7 +9,8 @@
 #include "classes.h"
 
 
-void sorting::bubble_sorting(std::vector <float> vector)
+// Пузырьковая сортировка
+void menu::functions::sorting::bubble_sorting(std::vector <double> vector)
 {
 	// Упорядочивание в порядке возрастания методом пузырьковой сортировки
 	int k = vector.size();
@@ -29,9 +30,8 @@ void sorting::bubble_sorting(std::vector <float> vector)
 	}
 }
 
-
 // Сортировка кучами
-void heapify(std::vector<float>& arr, int n, int i) {
+void heapify(std::vector<double>& arr, int n, int i) {
 
     int largest = i;
     int l = 2 * i + 1;
@@ -51,7 +51,7 @@ void heapify(std::vector<float>& arr, int n, int i) {
     }
 };
 
-void sorting::pyramid_sorting(std::vector<float> vector) {
+void menu::functions::sorting::pyramid_sorting(std::vector<double> vector) {
 
     int n = vector.size();
 
@@ -64,3 +64,9 @@ void sorting::pyramid_sorting(std::vector<float> vector) {
         heapify(vector, i, 0);
     }
 }
+
+// Сортировка вставками
+
+// Быстрая сортировка
+
+// Сортировка выбором

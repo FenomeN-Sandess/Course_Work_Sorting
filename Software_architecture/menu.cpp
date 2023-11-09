@@ -9,25 +9,29 @@
 
 #include "classes.h"
 
+
+
 void menu::start()
 {
+
 	std::cout << "Would you like to start a menu? enter y/n\n>>";
 	std::string y_n;
 	std::cin >> y_n;
-	this->work_process = (y_n == "Y") or (y_n == "y") ? true : false;
+	this->State = (y_n == "Y") or (y_n == "y") ? true : false;
 }
 
 void menu::end()
 {
+
 	std::cout << "Would you like to turn off the menu? enter y/n\n>>";
 	std::string y_n;
 	std::cin >> y_n;
-	this->work_process = (y_n == "Y") or (y_n == "y") ? false : true;
+	this->State = (y_n == "Y") or (y_n == "y") ? false : true;
 }
 
 void menu::choice()
 {
-	while (this->work_process) {
+	while (this->State) {
 		int CHOICE;
 		std::cout << "Choose action from list:\n1.Generate\n2.Calculate\n3.Save\n4.Download\n5.Display the table\n6.Display a plot\n7.Quit\n";
 		std::cin >> CHOICE;
