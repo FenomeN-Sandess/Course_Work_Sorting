@@ -1,9 +1,0 @@
-﻿D:\Program Files\VS_code\Visual_Studio_Code\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Software_architecture.vcxproj).  Это может привести к ошибкам очистки и перестроения.
-  menu_functions_sort.cpp
-D:\Dev\Software_architecture_lab\Software_architecture\menu_functions_sort.cpp(16,8): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-D:\Dev\Software_architecture_lab\Software_architecture\menu_functions_sort.cpp(56,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
-  menu_functions.cpp
-  menu.cpp
-  main.cpp
-  Создание кода...
-  Software_architecture.vcxproj -> D:\Dev\Software_architecture_lab\x64\Debug\Course work.exe
