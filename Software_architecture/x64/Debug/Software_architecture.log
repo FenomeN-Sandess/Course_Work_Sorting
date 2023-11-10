@@ -1,0 +1,7 @@
+﻿D:\Program Files\VS_code\Visual_Studio_Code\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Course work.vcxproj, Software_architecture.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  menu_control.cpp
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_control.h(18,40): warning C4244: инициализация: преобразование "double" в "unsigned int", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_control.h(19,42): warning C4244: инициализация: преобразование "double" в "unsigned int", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_control.cpp(65,41): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_control.cpp(65,29): warning C4244: аргумент: преобразование "unsigned int" в "float", возможна потеря данных
+  Software_architecture.vcxproj -> D:\Dev\Course_Work_Sorting\x64\Debug\Course_Work.exe
