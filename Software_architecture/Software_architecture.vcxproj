@@ -132,6 +132,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="menu_control.cpp" />
     <ClCompile Include="menu_functions_sort.cpp" />
     <ClCompile Include="menu_functions.cpp" />
@@ -139,6 +140,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="functions.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="menu_control.h" />
   </ItemGroup>

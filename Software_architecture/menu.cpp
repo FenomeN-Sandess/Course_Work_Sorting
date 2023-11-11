@@ -31,8 +31,6 @@ void menu::end()
 void menu::choice()
 {
 	while (State) {
-		cl.window(); // Запуск графического меню с доступом к функционалу программы
-
 		// Консольная версия, которая впервое время будет работать параллельно, а позже будет заблокирована
 		int CHOICE;
 		std::cout << "Choose action from list:\n1.Generate\n2.Calculate\n3.Save\n4.Download\n5.Display the table\n6.Display a plot\n7.Quit\n";
@@ -40,27 +38,30 @@ void menu::choice()
 		switch (CHOICE) // Вместо int CHOICE наиболее профессионально сделать перечисляемый тип enum
 		{
 		case 1:
-			Func.generate();
+			Func->generate();
+			std::cout << "Generation complete\n" << std::endl;
 			// Создание массива и его заполнение рандомными числами до 5000
 			break;
 		case 2:
-			Func.sorting();
+			Func->sorting();
+			std::cout << "Sorting complete" << std::endl;
 			// Выполнение сортировок и сохранение времени их выполнения
 			break;
 		case 3:
-			Func.saving();
+			Func->saving();
+			std::cout << "Saving complete" << std::endl;
 			// Сохранение полученных массивов в файл
 			break;
 		case 4:
-			Func.downloading();
+			Func->downloading();
 			// Загрузка массивов из файла
 			break;
 		case 5:
-			Func.show();
+			Func->show();
 			// Вывод таблицы по данным из массивов на экран + график
 			break;
 		case 6:
-			Func.display();
+			//Func.display();
 			// Вывод графика по данным из массивов.
 			break;
 		case 7:

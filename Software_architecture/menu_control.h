@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <optional>
 #include <string>
+#include "functions.h"
 #pragma once
 
 enum buttons {
@@ -18,6 +18,8 @@ enum buttons {
 
 
 class menu_control {
+private:
+	functions* Func;
 protected:
 	buttons active_button;
 	buttons get_button() {return active_button;}
@@ -58,18 +60,18 @@ protected:
 	void set_decoration_text(sf::Text& text, sf::Font& font, unsigned int& size, const sf::Color &color);
 	void definition_button_texts(std::vector <sf::Color>& rgb_default); // Описание операций в меню
 	void mouse_response_button(sf::Vector2i& mouse_pos,	std::vector <sf::Color>& rgb,
-		int& iter, int& count); // Функция описывающая событие, возникающее при наведении
-	//на кнопку курсора
+	int& iter, int& count); // Функция описывающая событие, возникающее при наведении на кнопку курсора
 	void click_response_button(); // функция, описывающая событие, возникающее при нажатии на кнопку 
-
 	std::vector <sf::Color> definition_color(std::vector <int>& first, std::vector <int>& second,
-		std::vector <int>& third, std::vector <int>& fourth);
+	std::vector <int>& third, std::vector <int>& fourth); // Функция определения вектора с rgb цветами
 
 public:
-
-	void window(); // Функция для создания окна, отрисовки содержимого и обработки собыnbq
+	menu_control(functions* f) : Func(f) {}
+	bool window(); // Функция для создания окна, отрисовки содержимого и обработки собыnbq
 	void plot(); // Функция для вывода графика
 	void table(); // Функция для вывода таблицы
+
+	menu_control() = default;
 };
 
 

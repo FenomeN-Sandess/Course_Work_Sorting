@@ -3,10 +3,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream> 
-
 #include <vector> 
 #include <string>
-
 #include "menu_control.h"
 
 
@@ -139,7 +137,7 @@ std::vector <sf::Color> menu_control::definition_color(std::vector <int>& first,
 }
 
 // Основные методы
-void menu_control::window()
+bool menu_control::window()
 {
 	download_image(background_texture, background_img); // Подгрузка фон
 	download_font(str_font); // Подгрузка шрифта
@@ -173,31 +171,29 @@ void menu_control::window()
 					switch (get_button())
 					{
 					case (buttons::generate):
-						std::cout << "Heat in generate" << std::endl;
+						Func->generate();
 						break;
 					case (buttons::calculate):
-						std::cout << "Heat in calculate" << std::endl;
+						Func->sorting();
 						break;
 					case (buttons::save):
-						std::cout << "Heat in save" << std::endl;
+						Func->saving();
 						break;
 					case (buttons::download):
-						std::cout << "Heat in download" << std::endl;
+						Func->downloading();
 						break;
 					case (buttons::table):
-						std::cout << "Heat in display the table" << std::endl;
+						Func->show();
 						break;
 					case (buttons::plot):
-						std::cout << "Heat in display a plot" << std::endl;
 						break;
 					case (buttons::restart):
-						std::cout << "Heat in restart" << std::endl;
+						return true;
 						break;
 					case (buttons::quit):
-						std::cout << "Heat in quit" << std::endl;
+						window.close();
 						break;
 					case (buttons::none):
-						std::cout << "None" << std::endl;
 						break;
 					}
 				}
@@ -212,6 +208,7 @@ void menu_control::window()
 		}
 		window.display(); //Вывод
 	}
+	return false;
 }
 
 void menu_control::plot()

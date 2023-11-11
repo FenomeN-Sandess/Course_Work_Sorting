@@ -1,4 +1,3 @@
 ﻿D:\Program Files\VS_code\Visual_Studio_Code\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Course work.vcxproj, Software_architecture.vcxproj).  Это может привести к ошибкам очистки и перестроения.
-  menu_control.cpp
-D:\Program Files\VS_code\Visual_Studio_Code\VC\Tools\MSVC\14.37.32822\include\optional(12): warning STL4038: The contents of <optional> are available only with C++17 or later.
+  main.cpp
   Software_architecture.vcxproj -> D:\Dev\Course_Work_Sorting\x64\Debug\Course_Work.exe

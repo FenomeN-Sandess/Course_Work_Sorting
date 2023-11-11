@@ -6,7 +6,7 @@
 #include <iomanip>
 #include <chrono>
 
-#include "menu.h"
+#include "functions.h"
 
 
 // Пузырьковая сортировка
