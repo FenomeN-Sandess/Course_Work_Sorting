@@ -17,7 +17,7 @@ void pyramid_sorting(std::vector <double> vector); /* Пирамидальная сортировка*/
 class menu { /* Главный класс меню */
 private: 
 	bool State = false;
-	menu_control cl;
+	menu_control cl; // Графическая оболочка меню
 protected:
 	class functions { /* Класс для работы с функциями */
 	protected:
@@ -47,9 +47,9 @@ protected:
 	functions Func; // объект класса functions в области видимости класса menu
 
 public:
-	void start();																				/*Запуск работы меню*/
-	void end();																				    /*Завершение работы меню*/
-	void choice();																				/*Выбор действия*/
+	void start(); // Запуск меню																				/*Запуск работы меню*/
+	void end();	// Остановка меню															    /*Завершение работы меню*/
+	void choice();	// Запуск графического меню + управление																/*Выбор действия*/
 
 	menu() = default;
 };
