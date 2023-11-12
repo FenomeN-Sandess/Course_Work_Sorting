@@ -1,3 +1,5 @@
 ﻿D:\Program Files\VS_code\Visual_Studio_Code\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Course work.vcxproj, Software_architecture.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  graph_menu.cpp
   main.cpp
+  Создание кода...
   Software_architecture.vcxproj -> D:\Dev\Course_Work_Sorting\x64\Debug\Course_Work.exe

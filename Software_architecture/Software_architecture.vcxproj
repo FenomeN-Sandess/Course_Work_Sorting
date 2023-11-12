@@ -133,7 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="functions.cpp" />
-    <ClCompile Include="menu_control.cpp" />
+    <ClCompile Include="graph_menu.cpp" />
     <ClCompile Include="menu_functions_sort.cpp" />
     <ClCompile Include="menu_functions.cpp" />
     <ClCompile Include="menu.cpp" />
@@ -142,7 +142,7 @@
   <ItemGroup>
     <ClInclude Include="functions.h" />
     <ClInclude Include="menu.h" />
-    <ClInclude Include="menu_control.h" />
+    <ClInclude Include="graph_menu.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll" />

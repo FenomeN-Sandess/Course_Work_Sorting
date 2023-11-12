@@ -7,10 +7,8 @@ private:
 	functions* Func;
 	bool State = false;
 public:
-	menu(functions* f) : Func(f) {}
+	menu(functions* f) : Func(f) {} // Конструктор класса с определением ссылки на метод класса Func
 	void start();																				/*Запуск работы меню*/
 	void end();																					/*Завершение работы меню*/
 	void choice();	 																			/*Запуск графического меню */
-
-	menu() = default;
 };

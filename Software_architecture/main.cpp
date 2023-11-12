@@ -1,5 +1,5 @@
 ﻿#include "menu.h"
-#include "menu_control.h"
+#include "graph_menu.h"
 #include "functions.h"
 
 
@@ -8,7 +8,7 @@ int main()
 	bool restart = false;
 	functions Func; // объект класса functions
 	menu Menu(&Func); /*Объект менюшки*/
-	menu_control cl(&Func); // Оконное приложение меню
+	graph_menu cl(&Func); // Оконное приложение меню
 
 	while (true) 
 	{

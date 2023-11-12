@@ -27,7 +27,7 @@
     <ClCompile Include="menu_functions_sort.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="menu_control.cpp">
+    <ClCompile Include="graph_menu.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="functions.cpp">
@@ -38,7 +38,7 @@
     <ClInclude Include="menu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="menu_control.h">
+    <ClInclude Include="graph_menu.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
