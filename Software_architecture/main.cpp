@@ -3,6 +3,8 @@
 #include "functions.h"
 
 
+
+
 int main()
 {
 	bool restart = false;

@@ -135,6 +135,7 @@
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="graph_menu.cpp" />
     <ClCompile Include="graph_menu_helping.cpp" />
+    <ClCompile Include="graph_menu_templates.cpp" />
     <ClCompile Include="menu_functions_sort.cpp" />
     <ClCompile Include="menu_functions.cpp" />
     <ClCompile Include="menu.cpp" />

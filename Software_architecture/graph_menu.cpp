@@ -14,42 +14,36 @@ void graph_menu::window_message(std::string message, std::string banner, sf::Vec
 	sf::RenderWindow window_message(sf::VideoMode(windowMessageWidth, windowMessageHeight), banner, sf::Style::None); //Создание окна
 	window_message.setFramerateLimit(fps);
 	sf::Vector2i window_size(windowWidth, windowHeight);
-	define_center_position_area(window_message, window_pos, window_size);
+	define_center_position_window(window_message, window_pos, window_size);
 
-	sf::RectangleShape rectangle; sf::Text msg; sf::Text ok;
-	sf::Vector2f rectangle_size(rectangle_window_size.at(0), rectangle_window_size.at(1));
+	sf::RectangleShape rectangle;
+	sf::Color color_rectangle_anim(rectangle_theFill_color_animation.at(0),
+		rectangle_theFill_color_animation.at(1), rectangle_theFill_color_animation.at(2),
+		rectangle_theFill_color_animation.at(3));
+	sf::Color rec_cl_outline (rectangle_outline_color[0], rectangle_outline_color[1],
+		rectangle_outline_color[2], rectangle_outline_color[3]);
+	sf::Vector2f rectangle_size (rectangle_window_size[0], rectangle_window_size[1]);
 	set_decoration_rectangle(rectangle, rectangle_size, rectangle_outline_thickness,
-		rectangle_outline_color, rectangle_theFill_color);
+		rec_cl_outline, rectangle_theFill_color);
 	define_center_position_x(rectangle, windowMessageWidth);
 	rectangle.setPosition(rectangle.getPosition().x, position_rectangle_y);
-	
+	sf::Text msg; sf::Text ok;
 
-
-
-
-	ok.setString("Ok"); msg.setString(message);
+	ok.setString("ok"); msg.setString(message);
+	sf::Color agr_outline_color(64,64,64);
 	set_decoration_text(ok, g.font_window, size_font_message, sf::Color::Black);
 	set_decoration_text(msg, g.font_window, size_font_message, sf::Color::Black);
-	define_center_position_x(ok, windowMessageWidth);
-	define_center_position_x(msg, windowMessageWidth);
-	ok.setPosition(ok.getPosition().x, position_agreement_y);
-	define_center_position_area(msg, windowMessageWidth, windowMessageHeight);
-
-	//std::vector <sf::Text> window_texts = { msg, ok };
-	std::vector <float> positions = { position_message_y, position_agreement_y };
-
-	//for (int i = 0; i < 2; i++) {
-	//	set_decoration_text(window_texts[i], g.font_window, size_font_message, sf::Color::Black);
-	//	define_center_position_x(window_texts[i], windowMessageWidth);
-	//	window_texts[i].setPosition(window_texts[i].getPosition().x, positions[i]);
-	//}
+	define_center_position_x(msg, windowMessageWidth);	
+	define_center_position_area_text(ok, g.font_window, size_font_message, rectangle);
+	
+	msg.setPosition(msg.getPosition().x, position_message_y);
 
 	while (window_message.isOpen()) { //Главный цикл - заканчивается, как только окно закрыто
 		sf::Event event; //Обработка событий
 
 		while (window_message.pollEvent(event)) {
 			sf::Vector2i mouse_pos = sf::Mouse::getPosition(window_message); // Определение позиции мыши
-			bool contain = is_there_cursor(ok, mouse_pos);
+			bool contain = is_there_cursor(rectangle, mouse_pos);
 			switch (event.type) {
 			case sf::Event::Closed: // Закрытие окна при нажатии на кнопку закрытия
 				window_message.close();
@@ -57,9 +51,14 @@ void graph_menu::window_message(std::string message, std::string banner, sf::Vec
 			case sf::Event::MouseMoved: // Обработка событий движения мыши
 				if (contain) {
 					ok.setOutlineThickness(border_size_button_window);
+					ok.setOutlineColor(agr_outline_color);
+					rectangle.setFillColor(color_rectangle_anim);
+					sf::Color outline_color(0, 0, 255, 100); rectangle.setOutlineColor(outline_color);
 				}
 				else {
 					ok.setOutlineThickness(0);
+					rectangle.setOutlineColor(rec_cl_outline);
+					rectangle.setFillColor(rectangle_theFill_color);
 				}
 				break;
 			case sf::Event::MouseButtonPressed:
@@ -73,9 +72,9 @@ void graph_menu::window_message(std::string message, std::string banner, sf::Vec
 		window_message.setActive(); //Активация окна для отрисовки
 		window_message.clear(sf::Color::White);
 
+		window_message.draw(rectangle);
 		window_message.draw(ok);
 		window_message.draw(msg);
-		window_message.draw(rectangle);
 
 
 		window_message.display(); //Вывод
@@ -185,6 +184,23 @@ void graph_menu::plot()
 
 void graph_menu::table()
 {
+	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Table"); //Создание окна
+	window.setFramerateLimit(fps); // Ограничение частоты кадров до 60 кадров в секунду
+	while (window.isOpen()) { //Главный цикл - заканчивается, как только окно закрыто
+		sf::Event event; //Обработка событий
+		while (window.pollEvent(event)) {
+			switch (event.type) {
+			case sf::Event::Closed: // Закрытие окна при нажатии на кнопку закрытия
+				window.close();
+				break;
+		}
+		window.setActive(); //Активация окна для отрисовки
+		window.clear();
+		for (const auto& text : g.texts) {
+			window.draw(text);
+		}
+		window.display(); //Вывод
+
 }
 
 

@@ -6,9 +6,6 @@
 #include <string>
 #include "graph_menu.h"
 
-
-// Второстепенные методы
-
 // Для меню
 void graph_menu::mouse_response_button(sf::Vector2i& mouse_pos,
 	std::vector <sf::Color>& rgb, int& iter, int& count)
@@ -83,7 +80,8 @@ void graph_menu::set_button(std::vector <sf::Text>& texts, sf::Vector2i& mouse_p
 }
 
 // Общие
-void graph_menu::define_center_position_area(sf::RenderWindow& window, sf::Vector2i& external_window_position, sf::Vector2i& external_window_size)
+
+void graph_menu::define_center_position_window(sf::RenderWindow& window, sf::Vector2i& external_window_position, sf::Vector2i& external_window_size)
 {	
 	int left_border = external_window_position.x; // Позиция Левой границы внешнего окна
 	int right_border = left_border + external_window_size.x; // Правая граница
@@ -92,50 +90,6 @@ void graph_menu::define_center_position_area(sf::RenderWindow& window, sf::Vecto
 	float Center_X = left_border + (right_border - left_border)/ 2.0f;
 	float Center_Y = top_border + (button_border - top_border) / 2.0f;
 	window.setPosition(sf::Vector2i (Center_X - window.getSize().x / 2.0f, Center_Y - window.getSize().y / 2.0f));
-}
-void graph_menu::define_center_position_area(sf::Text& text, unsigned int window_width, unsigned int window_height)
-{
-	float Center_X = window_width / 2.0f;
-	float Center_Y = window_height / 2.0f;
-	sf::FloatRect textBounds = text.getLocalBounds();
-	text.setPosition(Center_X - textBounds.width / 2.0f, Center_Y - textBounds.height / 2.0f);
-}
-void graph_menu::define_center_position_area(sf::Text& text, sf::RectangleShape& rectangle)
-{
-	int left_border = rectangle.getPosition().x; // Позиция Левой границы внешнего окна
-	int right_border = left_border + rectangle.getSize().x; // Правая граница
-	int top_border = rectangle.getPosition().y; // Верхняя граница
-	int button_border = top_border + rectangle.getSize().y; // Нижняя граница 
-	float Center_X = left_border + (right_border - left_border) / 2.0f;
-	float Center_Y = top_border + (button_border - top_border) / 2.0f;
-	sf::FloatRect textBounds = rectangle.getLocalBounds();
-	text.setPosition(Center_X - textBounds.width / 2.0f, Center_Y - textBounds.height / 2.0f);
-}
-
-
-void graph_menu::define_center_position_x(sf::Text& text, unsigned int& width)
-{
-	float Center_X = width / 2.0f;
-	sf::FloatRect textBounds = text.getLocalBounds();
-	text.setPosition(Center_X - textBounds.width / 2.0f, text.getPosition().y);
-}
-void graph_menu::define_center_position_x(sf::RectangleShape& rectangle, unsigned int& width) {
-	float Center_X = width / 2.0f;
-	sf::FloatRect rectangleBounds = rectangle.getLocalBounds();
-	rectangle.setPosition(Center_X - rectangleBounds.width / 2.0f, rectangle.getPosition().y);
-}
-
-void graph_menu::define_center_position_y(sf::Text& text, unsigned int& height)
-{
-	float Center_Y = height / 2.0f;
-	sf::FloatRect textBounds = text.getLocalBounds();
-	text.setPosition(text.getPosition().x, Center_Y - textBounds.height / 2.0f);
-}
-void graph_menu::define_center_position_y(sf::RectangleShape& rectangle, unsigned int& height)
-{
-	float Center_Y = height / 2.0f;
-	sf::FloatRect textBounds = rectangle.getLocalBounds();
-	rectangle.setPosition(rectangle.getPosition().x, Center_Y - textBounds.height / 2.0f);
 }
 
 int graph_menu::define_index(sf::Text& elem, std::vector<sf::Text>& vector, int count)
@@ -147,11 +101,7 @@ int graph_menu::define_index(sf::Text& elem, std::vector<sf::Text>& vector, int 
 	return -1;
 }
 
-bool graph_menu::is_there_cursor(sf::Text& text, sf::Vector2i& mouse_pos)
-{
-	sf::FloatRect textBounds = text.getGlobalBounds();  // Объект прямоугольника, заполненного числами Float
-	return textBounds.contains(static_cast<float>(mouse_pos.x), static_cast<float>(mouse_pos.y));
-}
+
 
 void graph_menu::download_font(sf::Font& font, std::string& str)
 {
