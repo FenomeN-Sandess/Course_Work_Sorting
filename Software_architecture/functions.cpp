@@ -57,6 +57,27 @@ void functions::save_time(void view_sorting(std::vector <double> vector), std::v
 	trial_vect.clear(); //Очищение пробного вектора
 }
 
+void functions::save_data(std::vector<std::vector<double>>& sort_time) {
+	for (size_t i = 0; i < 2; i++)
+	{
+		for (size_t j = 0; j < 11; j++)
+		{
+			outfile << sort_time[i][j] << " ";
+		}
+	}
+};
+
+void functions::download_data(std::vector<std::vector<double>>& sort_time) {
+	for (size_t i = 0; i < 2; i++)
+	{
+		for (size_t j = 0; j < 11; j++)
+		{
+			inputfile >> sort_time[i][j];
+		}
+	}
+};
+
+
 //Основные функции
 void functions::generate() {
 
@@ -78,62 +99,61 @@ void functions::sorting()
 			trial_vect.push_back(vect[j]); // заполнение массива со срезом - голова сгенерированного вектора
 		}
 
-		save_time(bubble_sorting, bubble_time, n);
 		save_time(pyramid_sorting, pyramid_time, n);
-		//save_time(std::bind(&sorting::_sorting, &Sort, std::placeholders::_1), Info._time, n);
-		//save_time(std::bind(&sorting::_sorting, &Sort, std::placeholders::_1), Info._time, n);
-		//save_time(std::bind(&sorting::_sorting, &Sort, std::placeholders::_1), Info._time, n);
+		save_time(quick_sorting, quick_time, n);
+		save_time(insertion_sorting, insertion_time, n);
+		save_time(selection_sorting, selection_time, n);
+		save_time(bubble_sorting, bubble_time, n);
 
 	}
 }
 
 void functions::saving()
 {
-	file.open(path_to_file); //Открытие файла или его создание 
-	if (!file.is_open()) { //Проверка на открытие
+	outfile.open(path_to_file); //Открытие файла или его создание 
+	if (!outfile.is_open()) { //Проверка на открытие
+		std::cout << "file is not open" << std::endl;
 	}
 	else {
-		//Запись объекта, содержащего данные о времени выполнения сортировок, в файл.
-
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 11; j++) {
-				file.write(reinterpret_cast<char*>(&bubble_time[i][j]), sizeof(double));
-				file.write(reinterpret_cast<char*>(&pyramid_time[i][j]), sizeof(double));
-			}
-		}
+		save_data(bubble_time);
+		save_data(pyramid_time);
+		save_data(insertion_time);
+		save_data(quick_time);
+		save_data(selection_time);
 	}
-	file.close();
+	outfile.close();
 }
 
 void functions::downloading()
 {
-	file.open(path_to_file); // Открытие файла (не создание!)
-	if (!file.is_open()) {
+	inputfile.open(path_to_file); // Открытие файла (не создание!)
+	if (!inputfile.is_open()) {
 	}
 	else {
-		// Чтения объекта, содержащего данные о времени выполнения сортировок, из файла
-		for (int i = 0; i < 2; i++) {
-			for (int j = 0; j < 11; j++) {
-				file.read(reinterpret_cast<char*>(&bubble_time[i][j]), sizeof(double));
-				file.read(reinterpret_cast<char*>(&pyramid_time[i][j]), sizeof(double));
-			}
-		}
+		download_data(bubble_time);
+		download_data(pyramid_time);
+		download_data(insertion_time);
+		download_data(quick_time);
+		download_data(selection_time);
 	}
-	file.close();
+	inputfile.close();
 }
 
 void functions::show() {
-
-	//Control.start_menu();
 	std::cout << "Bubble Table" << std::endl;
 	print_table(bubble_time);
-	std::cout << "\nPyramid Table" << std::endl;
+	std::cout << "\nHeap Table" << std::endl;
 	print_table(pyramid_time);
+	std::cout << "\nQuick Table" << std::endl;
+	print_table(quick_time);
+	std::cout << "\nSelection Table" << std::endl;
+	print_table(selection_time);
+	std::cout << "\nInsertion Table" << std::endl;
+	print_table(insertion_time);
 	std::cout << std::endl;
-
 }
 
-bool check_content_massive(std::vector<std::vector<double>> sorting_time)
+bool functions::check_content_massive(std::vector<std::vector<double>> sorting_time)
 {
 	for (auto iter_1 : sorting_time) {
 		for (auto iter_2 : iter_1) { 
@@ -154,6 +174,9 @@ void functions::reset_data()
 	if (check_content_massive(bubble_time) == true) {
 		cycle_cleaning(bubble_time);
 		cycle_cleaning(pyramid_time);
+		cycle_cleaning(insertion_time);
+		cycle_cleaning(quick_time);
+		cycle_cleaning(selection_time);
 	} 
 }
 
@@ -338,3 +361,9 @@ void functions::display()
 	}
 }
 
+bool functions::empty_data() {
+	return !(check_content_massive(bubble_time) && check_content_massive(pyramid_time)
+		&& check_content_massive(insertion_time) && check_content_massive(quick_time)
+		&& check_content_massive(selection_time));
+
+}

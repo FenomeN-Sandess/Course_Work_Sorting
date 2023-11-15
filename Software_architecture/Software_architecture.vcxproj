@@ -134,17 +134,22 @@
   <ItemGroup>
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="graph_menu.cpp" />
-    <ClCompile Include="graph_menu_helping.cpp" />
-    <ClCompile Include="graph_menu_templates.cpp" />
+    <ClCompile Include="graph_menu_global.cpp" />
+    <ClCompile Include="graph_message.cpp" />
+    <ClCompile Include="graph_table.cpp" />
     <ClCompile Include="menu_functions_sort.cpp" />
-    <ClCompile Include="menu_functions.cpp" />
     <ClCompile Include="menu.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="plot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functions.h" />
+    <ClInclude Include="graph_menu_global.h" />
+    <ClInclude Include="graph_message.h" />
+    <ClInclude Include="graph_table.h" />
     <ClInclude Include="menu.h" />
     <ClInclude Include="graph_menu.h" />
+    <ClInclude Include="plot.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="openal32.dll" />

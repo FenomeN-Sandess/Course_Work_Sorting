@@ -7,14 +7,13 @@
 #include <string>
 #include "graph_menu.h"
 
-
 void graph_menu::window_message(std::string message, std::string banner, sf::Vector2i window_pos)
 {
-	download_font(g.font_window, str_font_window);
+	g.download_font(g.font_window, str_font_window);
 	sf::RenderWindow window_message(sf::VideoMode(windowMessageWidth, windowMessageHeight), banner, sf::Style::None); //Создание окна
-	window_message.setFramerateLimit(fps);
+	window_message.setFramerateLimit(g.fps);
 	sf::Vector2i window_size(windowWidth, windowHeight);
-	define_center_position_window(window_message, window_pos, window_size);
+	g.define_center_position_window(window_message, window_pos, window_size);
 
 	sf::RectangleShape rectangle;
 	sf::Color color_rectangle_anim(rectangle_theFill_color_animation.at(0),
@@ -23,7 +22,7 @@ void graph_menu::window_message(std::string message, std::string banner, sf::Vec
 	sf::Color rec_cl_outline (rectangle_outline_color[0], rectangle_outline_color[1],
 		rectangle_outline_color[2], rectangle_outline_color[3]);
 	sf::Vector2f rectangle_size (rectangle_window_size[0], rectangle_window_size[1]);
-	set_decoration_rectangle(rectangle, rectangle_size, rectangle_outline_thickness,
+	g.set_decoration_rectangle(rectangle, rectangle_size, rectangle_outline_thickness,
 		rec_cl_outline, rectangle_theFill_color);
 	define_center_position_x(rectangle, windowMessageWidth);
 	rectangle.setPosition(rectangle.getPosition().x, position_rectangle_y);
@@ -31,8 +30,8 @@ void graph_menu::window_message(std::string message, std::string banner, sf::Vec
 
 	ok.setString("ok"); msg.setString(message);
 	sf::Color agr_outline_color(64,64,64);
-	set_decoration_text(ok, g.font_window, size_font_message, sf::Color::Black);
-	set_decoration_text(msg, g.font_window, size_font_message, sf::Color::Black);
+	g.set_decoration_text(ok, g.font_window, size_font_message, sf::Color::Black);
+	g.set_decoration_text(msg, g.font_window, size_font_message, sf::Color::Black);
 	define_center_position_x(msg, windowMessageWidth);	
 	define_center_position_area_text(ok, g.font_window, size_font_message, rectangle);
 	
@@ -83,10 +82,10 @@ void graph_menu::window_message(std::string message, std::string banner, sf::Vec
 
 bool graph_menu::window()
 {
-	download_image(g.background_texture, background_img); // Подгрузка фон
-	download_font(g.font, str_font); // Подгрузка шрифта
+	g.download_image(g.background_texture, background_img); // Подгрузка фон
+	g.download_font(g.font, str_font); // Подгрузка шрифта
 	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "MENU", sf::Style::None); //Создание окна
-	window.setFramerateLimit(fps); // Ограничение частоты кадров до 60 кадров в секунду
+	window.setFramerateLimit(g.fps); // Ограничение частоты кадров до 60 кадров в секунду
 	g.background_sprite.setTexture(g.background_texture); // Устанавливаем фон в sprite 
 	g.background_sprite.setScale((static_cast<float>(windowWidth) / g.background_texture.getSize().x), // Определяем размеры спрайта под область окна
 	(static_cast<float>(windowHeight) / g.background_texture.getSize().y)); // Из документации SFML: размер текстуры равен (1,1) - растягиваем текстуру на весь размер окна
@@ -132,26 +131,29 @@ bool graph_menu::window()
 					switch (get_button())
 					{
 					case (buttons::generate):
-						window_message("Generation completed", "Message Generation", window_pos);
 						Func->generate();
+						window_message("Generation completed", "Message Generation", window_pos);
 						break;
 					case (buttons::calculate):
-						window_message("Calculating completed", "Message Calculating", window_pos);
 						Func->sorting();
+
+						window_message("Calculating completed", "Message Calculating", window_pos);
 						break;
 					case (buttons::save):
-						window_message("Saving completed", "Message Saving", window_pos);
 						Func->saving();
+						window_message("Saving completed", "Message Saving", window_pos);
 						break;
 					case (buttons::download):
-						window_message("downloading completed", "Message Saving", window_pos);
 						Func->downloading();
+						window_message("Downloading completed", "Message Saving", window_pos);
 						break;
 					case (buttons::table):
-						Func->show();
+						t.table();
 						break;
 					case (buttons::plot):
-						Func->display();
+						if (Func->empty_data()) window_message("Download data", "Error", window_pos);
+						else p.plot();
+						//Func->display();
 						break;
 					case (buttons::restart):
 						Func->reset_data();
@@ -178,32 +180,85 @@ bool graph_menu::window()
 	return false;
 }
 
-void graph_menu::plot()
+// Для меню
+void graph_menu::mouse_response_button(sf::Vector2i& mouse_pos,
+	std::vector <sf::Color>& rgb, int& iter, int& count)
 {
+	bool contain = is_there_cursor(g.texts.at(iter), mouse_pos); // 
+	if (contain) { //Проверка, находится ли курсор в области этого прямоугольника
+		sf::Color border_color(border_color_button[0], border_color_button[1], border_color_button[2]);
+		g.texts.at(iter).setFillColor(rgb.at(count));
+		g.texts.at(iter).setOutlineThickness(border_size_button);
+		g.texts.at(iter).setOutlineColor(border_color);
+	}
+	else { // Возврат настроек по умолчанию. Из документации SFML
+		g.texts.at(iter).setFillColor(rgb.at(count + 2));
+		g.texts.at(iter).setOutlineThickness(0);
+		g.texts.at(iter).setOutlineColor(sf::Color::Black);
+	}
 }
 
-void graph_menu::table()
+void graph_menu::definition_button_texts(std::vector <sf::Color>& rgb_default)
 {
-	sf::RenderWindow window(sf::VideoMode(windowWidth, windowHeight), "Table"); //Создание окна
-	window.setFramerateLimit(fps); // Ограничение частоты кадров до 60 кадров в секунду
-	while (window.isOpen()) { //Главный цикл - заканчивается, как только окно закрыто
-		sf::Event event; //Обработка событий
-		while (window.pollEvent(event)) {
-			switch (event.type) {
-			case sf::Event::Closed: // Закрытие окна при нажатии на кнопку закрытия
-				window.close();
+	int start_value = 0;
+	for (int j = 2; j >= 1; j--)
+	{
+		for (int i = start_value; i < text_operation.size() / j; i++) {
+			sf::Text operation;
+			g.set_decoration_text(operation, g.font, size_font, g.rgb[j + 1]);
+			operation.setString(text_operation.at(i));
+			operation.setPosition(operation.getPosition().x, position_operation_y);
+			define_center_position_x(operation, windowWidth);
+			operation.setPosition(operation.getPosition().x, operation.getPosition().y + (g.count++) * padding_bottom_operation);
+			g.texts.push_back(operation);
+		}	start_value += 4;
+	} g.count = 0;
+}
+
+void graph_menu::set_button(std::vector <sf::Text>& texts, sf::Vector2i& mouse_pos)
+{
+	for (auto text : texts) {
+		if (is_there_cursor(text, mouse_pos)) {
+			switch (g.define_index(text, texts, g.count = 0))
+			{
+			case 0:
+				this->active_button = buttons::generate;
 				break;
+			case 1:
+				this->active_button = buttons::calculate;
+				break;
+			case 2:
+				this->active_button = buttons::save;
+				break;
+			case 3:
+				this->active_button = buttons::download;
+				break;
+			case 4:
+				this->active_button = buttons::table;
+				break;
+			case 5:
+				this->active_button = buttons::plot;
+				break;
+			case 6:
+				this->active_button = buttons::restart;
+				break;
+			case 7:
+				this->active_button = buttons::quit;
+				break;
+			case -1:
+				this->active_button = buttons::none;
+				break;
+			}
 		}
-		window.setActive(); //Активация окна для отрисовки
-		window.clear();
-		for (const auto& text : g.texts) {
-			window.draw(text);
-		}
-		window.display(); //Вывод
-
+	}
 }
 
-
-
-
-
+std::vector <sf::Color> graph_menu::definition_color(std::vector <int>& first, std::vector <int>& second,
+	std::vector <int>& third, std::vector <int>& fourth)
+{
+	sf::Color rgb_default_1(first[0], first[1], first[2], first[3]);
+	sf::Color rgb_default_2(second[0], second[1], second[2], second[3]);
+	sf::Color rgb_following_1(third[0], third[1], third[2], fourth[3]);
+	sf::Color rgb_following_2(fourth[0], fourth[1], fourth[2], fourth[3]);
+	return { rgb_default_2, rgb_default_1, rgb_following_2, rgb_following_1 };
+}

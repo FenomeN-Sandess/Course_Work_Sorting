@@ -31,7 +31,7 @@ void menu::end()
 void menu::choice()
 {
 	while (State) {
-		//  онсольна€ верси€, котора€ впервое врем€ будет работать параллельно, а позже будет заблокирована
+		//  онсольна€ верси€
 		int CHOICE;
 		std::cout << "Choose action from list:\n1.Generate\n2.Calculate\n3.Save\n4.Download\n5.Display the table\n6.Display a plot\n7.Quit\n";
 		std::cin >> CHOICE;
