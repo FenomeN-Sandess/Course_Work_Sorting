@@ -1,2 +1,68 @@
 ﻿D:\Program Files\VS_code\Visual_Studio_Code\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: промежуточный каталог (x64\Debug\) содержит файлы, которые используются совместно с другим проектом (Course work.vcxproj, Software_architecture.vcxproj).  Это может привести к ошибкам очистки и перестроения.
+  graph_menu.cpp
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.h(60,32): warning C4244: аргумент: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.h(61,40): warning C4244: аргумент: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\graph_menu.h(55,36): warning C4305: инициализация: усечение из "double" в "float"
+  graph_table.cpp
+D:\Dev\Course_Work_Sorting\Software_architecture\graph_table.cpp(36,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Dev\Course_Work_Sorting\Software_architecture\graph_table.cpp(50,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\Dev\Course_Work_Sorting\Software_architecture\graph_table.cpp(60,20): warning C4018: <: несоответствие типов со знаком и без знака
+  main.cpp
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.h(60,32): warning C4244: аргумент: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.h(61,40): warning C4244: аргумент: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\graph_menu.h(55,36): warning C4305: инициализация: усечение из "double" в "float"
+  menu.cpp
+  menu_functions_sort.cpp
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_functions_sort.cpp(12,8): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_functions_sort.cpp(51,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_functions_sort.cpp(65,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_functions_sort.cpp(101,14): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\menu_functions_sort.cpp(107,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  plot.cpp
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.h(60,32): warning C4244: аргумент: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.h(61,40): warning C4244: аргумент: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(17,69): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(17,46): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(77,99): warning C4244: аргумент: преобразование "_Ty" в "T", возможна потеря данных
+          with
+          [
+              _Ty=double
+          ]
+          and
+          [
+              T=float
+          ]
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(80,24): warning C4244: =: преобразование "_Ty" в "float", возможна потеря данных
+          with
+          [
+              _Ty=double
+          ]
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(118,16): warning C4244: инициализация: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(128,47): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(131,34): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(145,40): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(149,16): warning C4244: инициализация: преобразование "float" в "size_t", возможна потеря данных
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(155,68): warning C4244: аргумент: преобразование "unsigned int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\Dev\Course_Work_Sorting\Software_architecture\plot.cpp(170,34): warning C4244: =: преобразование "_Ty" в "float", возможна потеря данных
+          with
+          [
+              _Ty=double
+          ]
+  Создание кода...
   Software_architecture.vcxproj -> D:\Dev\Course_Work_Sorting\x64\Debug\Course_Work.exe

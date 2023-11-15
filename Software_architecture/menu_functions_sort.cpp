@@ -1,13 +1,10 @@
-
 #pragma once
 #include <iostream>
 #include <string>
 #include <vector>
 #include <iomanip>
 #include <chrono>
-
 #include "functions.h"
-
 
 // Пузырьковая сортировка
 void bubble_sorting(std::vector <double> vector)

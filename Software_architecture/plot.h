@@ -40,10 +40,7 @@ protected:
 	sf::Color color_quick; sf::Color color_selection;
 	sf::Color color_text_in; sf::Color color_arr_rec_outline = sf::Color::Transparent;
 	sf::Color color_arr_rec_theFill;
-
 	sf::Vector2f size_information;
-
-
 	unsigned int size_segments = static_cast<unsigned int>(plotWidth / 100.0f);
 	void graph(sf::Color& color, std::vector<std::vector<double>>& sort_time);
 	void define_designination();

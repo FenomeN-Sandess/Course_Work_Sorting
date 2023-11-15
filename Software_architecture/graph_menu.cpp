@@ -136,7 +136,6 @@ bool graph_menu::window()
 						break;
 					case (buttons::calculate):
 						Func->sorting();
-
 						window_message("Calculating completed", "Message Calculating", window_pos);
 						break;
 					case (buttons::save):
@@ -148,6 +147,7 @@ bool graph_menu::window()
 						window_message("Downloading completed", "Message Saving", window_pos);
 						break;
 					case (buttons::table):
+						if (Func->empty_data()) window_message("Download data", "Error", window_pos);
 						t.table();
 						break;
 					case (buttons::plot):

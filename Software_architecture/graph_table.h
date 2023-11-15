@@ -34,5 +34,4 @@ protected:
 public:
 	table_window(functions* f) : Func(f), g(f) {}
 	void table();
-
 };
