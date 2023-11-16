@@ -21,6 +21,7 @@ struct global
 	std::vector<sf::Text> texts; // Вектор объектов текст
 	std::vector<sf::RectangleShape> rectangles; // Вектор объектов прямоугольников
 	std::vector<sf::CircleShape> circles;
+	std::vector<sf::VertexArray> vertexes;
 	std::vector <sf::Color> rgb; // Вектор цветов
 	sf::VideoMode desktop = sf::VideoMode::getDesktopMode(); // Получение разрешения экрана
 	unsigned int screenWidth = desktop.width; // Ширина экрана
@@ -36,7 +37,7 @@ struct global
 	void set_decoration_rectangle(sf::RectangleShape& rectangle, sf::Vector2f& size,
 		float& outline_thickness, sf::Color& outline_color, sf::Color& theFill_color);
 	void download_backround(std::string background_img, unsigned int windowWidth, unsigned int windowHeight);
-	unsigned int fps = 144;
+	unsigned int fps = 60;
 
 };
 

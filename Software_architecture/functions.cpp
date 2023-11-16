@@ -41,20 +41,22 @@ void functions::print_table(const std::vector<std::vector<double>>& data) {
 	std::cout << std::endl;
 }
 
-void functions::save_time(void view_sorting(std::vector <double> vector), std::vector<std::vector<double>>& view_time, int n)
+void functions::save_time(void (*view_sorting)(std::vector <double>& vector), std::vector<std::vector<double>>& view_time)
 {
-	for (int j = 0; j < diff_par[n]; j++) {
-		trial_vect.push_back(vect[j]); // заполнение массива со срезом - голова сгенерированного вектора
+	for (int n = 0; n <= 10; n++) {
+		for (int j = 0; j < diff_par[n]; j++) {
+			trial_vect.push_back(vect[j]); // заполнение массива со срезом - голова сгенерированного вектора
+		}
+
+		auto start = std::chrono::high_resolution_clock::now(); //Сохранение текущего времени
+		view_sorting(trial_vect);
+		auto end = std::chrono::high_resolution_clock::now();
+		std::chrono::duration<double> difference = end - start; //Время за которое выполнена сортировка
+		view_time[0][n] = diff_par[n];
+		view_time[1][n] = difference.count();
+
+		trial_vect.clear(); //Очищение пробного вектора
 	}
-
-	auto start = std::chrono::high_resolution_clock::now(); //Сохранение текущего времени
-	view_sorting(trial_vect);
-	auto end = std::chrono::high_resolution_clock::now();
-	std::chrono::duration<double> difference = end - start; //Время за которое выполнена сортировка
-	view_time[0][n] = diff_par[n];
-	view_time[1][n] = difference.count();
-
-	trial_vect.clear(); //Очищение пробного вектора
 }
 
 void functions::save_data(std::vector<std::vector<double>>& sort_time) {
@@ -86,26 +88,17 @@ void functions::generate() {
 		double test = ((rand() % 5001));
 		vect.push_back(test); //Заполнение массива данными
 	}
-
 }
 
 void functions::sorting()
 {
-	for (int n = 0; n <= 10; n++) {
 
-		// Создание среза вектора до n
+	save_time(pyramid_sorting, pyramid_time);
+	save_time(quick_sorting, quick_time);
+	save_time(insertion_sorting, insertion_time);
+	save_time(selection_sorting, selection_time);
+	save_time(bubble_sorting, bubble_time);
 
-		for (int j = 0; j < diff_par[n]; j++) {
-			trial_vect.push_back(vect[j]); // заполнение массива со срезом - голова сгенерированного вектора
-		}
-
-		save_time(pyramid_sorting, pyramid_time, n);
-		save_time(quick_sorting, quick_time, n);
-		save_time(insertion_sorting, insertion_time, n);
-		save_time(selection_sorting, selection_time, n);
-		save_time(bubble_sorting, bubble_time, n);
-
-	}
 }
 
 void functions::saving()
@@ -155,8 +148,8 @@ void functions::show() {
 
 bool functions::check_content_massive(std::vector<std::vector<double>> sorting_time)
 {
-	for (auto iter_1 : sorting_time) {
-		for (auto iter_2 : iter_1) { 
+	for (std::vector <double> iter_1 : sorting_time) {
+		for (double iter_2 : iter_1) { 
 			if (iter_2 != 0) { return true; }
 		} 
 	} 

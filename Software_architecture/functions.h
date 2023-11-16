@@ -9,18 +9,17 @@
 #include <functional> 
 
 
-void bubble_sorting(std::vector <double> vector); /* Пузырьковая сортировка */
-void pyramid_sorting(std::vector <double> vector); /* Пирамидальная сортировка*/
-void insertion_sorting(std::vector<double> vector); // Сортировка вставками
-void selection_sorting(std::vector<double> vector); // Сортировка вставками
-void quick_sorting(std::vector<double> vector); // Быстрая сортировка
+void bubble_sorting(std::vector <double>& vector); /* Пузырьковая сортировка */
+void pyramid_sorting(std::vector <double>& vector); /* Пирамидальная сортировка*/
+void insertion_sorting(std::vector<double>& vector); // Сортировка вставками
+void selection_sorting(std::vector<double>& vector); // Сортировка вставками
+void quick_sorting(std::vector<double>& vector); // Быстрая сортировка
 
 class functions { /* Класс для работы с функциями */
 protected:
-	std::fstream file;	// Объект класса для чтения и записи данных из файла и в файл
 	std::ofstream outfile;
 	std::ifstream inputfile;
-	int C = 1000;																			//Константа (размер массива вектора)
+	int C = 100000;																			//Константа (размер массива вектора)
 	std::vector <double> vect;																/* Динамический массив с числами double */
 	std::vector <double> trial_vect;														/* Срезанный массив */
 	std::string path_to_file = "Results_of_sortings.txt";								    // Путь к файлу
@@ -28,7 +27,7 @@ protected:
 
 	
 	void print_table(const std::vector<std::vector<double>>& data);
-	void save_time(void view_sorting(std::vector <double> vector), std::vector<std::vector<double>>& view_time, int n);
+	void save_time(void(*view_sorting)(std::vector<double>& vector), std::vector<std::vector<double>>& view_time);
 	void save_data(std::vector<std::vector<double>>& sort_time);
 	void download_data(std::vector<std::vector<double>>& sort_time);
 
@@ -37,14 +36,14 @@ public:
 		insertion_time(2, std::vector<double>(11, 0.0)), quick_time(2, std::vector<double>(11, 0.0)),
 		selection_time(2, std::vector<double>(11, 0.0)) {}
 
-	std::vector<std::vector<double>> bubble_time;											// Создание вектора bubble_time
-	std::vector<std::vector<double>> pyramid_time;										    // Создание вектора pyramid_time
+	std::vector<std::vector<double>> bubble_time;										
+	std::vector<std::vector<double>> pyramid_time;										    
 	std::vector<std::vector<double>> insertion_time;										
 	std::vector<std::vector<double>> quick_time;
 	std::vector<std::vector<double>> selection_time;
 
-	void generate();																		/*Генерация массива*/
-	void sorting();																			/*Выполнить сортировку и сохранить время в массив*/
+	void generate();																		/* Генерация массива*/
+	void sorting();																			/* Выполнить сортировку и сохранить время в массив*/
 	void saving();																			/* Сохранение данных в файл*/
 	void downloading();																		/* Чтение данных из файла*/
 	void show(); 																			/* Показать данные в таблице*/

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <string>
+#include <cmath>
 
 void table_window::arrow() {
 	sf::Vector2f size_arrow_cell(size_cell_width * 2, size_cell_height);
@@ -33,14 +34,14 @@ void table_window::desctiption_title (sf::RectangleShape rectangle, std::string 
 }
 
 void table_window::cells(std::vector<std::vector<double>> sort_time, int number_row) {
-	for (int i = 1; i < num_columns; i++)
+	for (size_t i = 1; i < num_columns; i++)
 	{
 		sf::Vector2f size_cell(size_cell_width, size_cell_height);
 		sf::RectangleShape cell;
 		g.set_decoration_rectangle(cell, size_cell, size_cell_outline, color_cell_outline, color_cell_theFill);
 		cell.setPosition((i + 1) * size_cell.x, number_row*size_cell.y);
 		g.rectangles.push_back(cell);
-		desctiption_title(cell, std::to_string(sort_time[1][i-1]));
+		desctiption_title(cell, (std::to_string(std::round((10000 * sort_time[1][i - 1]) * pow(10, 3)) / pow(10, 3))).substr(0,5));
 
 	}
 };
@@ -126,29 +127,13 @@ void table_window::table()
 			case sf::Event::MouseMoved: 
 				animation_arrow(arrow_sprite_width_before, arrow_sprite_width_after, 
 					arrow_sprite_height_before, arrow_sprite_height_after, mouse_pos);
-				if (g.isDragging) {
-					g.current_position = sf::Mouse::getPosition();
-					g.delta = g.current_position - g.start_position;
-					window.setPosition(window.getPosition() + g.delta);
-					g.start_position = g.current_position;
-				}
 				break;
 			case sf::Event::MouseButtonPressed:
 				if ((event_table.mouseButton.button == sf::Mouse::Left)) {
 					if (is_there_cursor(g.arrow_sprite, mouse_pos)) { window.close(); g.texts.clear(); g.rectangles.clear();
 					}
 				}
-
-				g.isDragging = true;
-				g.start_position = sf::Mouse::getPosition();
-			
 				break;
-			case sf::Event::MouseButtonReleased:
-				if (event_table.mouseButton.button == sf::Mouse::Left) {
-					g.isDragging = false;
-				}
-				break;
-
 			}
 			window.setActive(); 
 			window.clear(sf::Color::White);

@@ -24,7 +24,7 @@ protected:
 	std::vector <std::string> names_sort = {"Bubble sort", "Heap sort",
 		"Quick sort", "Selection sort", "Insertion sort"}; 
 	std::string font = "arial.ttf";
-	std::string background_img = "background_table.jpg"; // Картинка фона
+	std::string background_img = "backgroundPlot_6.jpg"; // Картинка фона
 	void arrow();
 	void desctiption_title(sf::RectangleShape rectangle, std::string text_in);
 	void cells(std::vector<std::vector<double>> sort_time, int number_row);

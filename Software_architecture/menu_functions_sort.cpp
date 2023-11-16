@@ -7,7 +7,7 @@
 #include "functions.h"
 
 // Пузырьковая сортировка
-void bubble_sorting(std::vector <double> vector)
+void bubble_sorting(std::vector <double>& vector)
 {
 	int k = vector.size();
 	bool swapped;
@@ -46,7 +46,7 @@ void heapify(std::vector<double>& arr, int n, int i) {
     }
 };
 
-void pyramid_sorting(std::vector<double> vector) {
+void pyramid_sorting(std::vector<double>& vector) {
 
     int n = vector.size();
 
@@ -61,7 +61,7 @@ void pyramid_sorting(std::vector<double> vector) {
 }
 
 // Сортировка вставками
-void insertion_sorting(std::vector<double> vector) {
+void insertion_sorting(std::vector<double>& vector) {
     int n = vector.size();
     for (int i = 1; i < n; i++) {
         double key = vector[i];
@@ -88,7 +88,7 @@ int partition(std::vector<double>& vector, int low, int high) {
     return (i + 1);
 }
 
-void quick_sort_helper(std::vector<double> vector, int low, int high) {
+void quick_sort_helper(std::vector<double>& vector, int low, int high) {
     if (low < high) {
         int pi = partition(vector, low, high);
         quick_sort_helper(vector, low, pi - 1);
@@ -96,14 +96,14 @@ void quick_sort_helper(std::vector<double> vector, int low, int high) {
     }
 }
 
-void quick_sorting(std::vector<double> vector) {
+void quick_sorting(std::vector<double>& vector) {
     int low = 0;
     int high = vector.size() - 1;
     quick_sort_helper(vector, low, high);
 }
 
 // Сортировка выбором
-void selection_sorting(std::vector<double> vector) {
+void selection_sorting(std::vector<double>& vector) {
     int n = vector.size();
     for (int i = 0; i < n - 1; i++) {
         int min_index = i;

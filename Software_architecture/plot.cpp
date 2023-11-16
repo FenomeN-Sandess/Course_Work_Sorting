@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <string>
-
+#include <cmath>
 //void plot_window::
 
 void plot_window::arrow() {
@@ -81,7 +81,15 @@ void plot_window::graph(sf::Color& color, std::vector<std::vector<double>>& sort
 		circle(position_OX + (g.count + 1) * size_cells_width, before, radius, 2, color, color);
 		g.circles.push_back(circle_shape);
 		g.count += 1;
-	} g.count = 0;
+	} g.count = 0; g.vertexes.push_back(straight);
+}
+
+void plot_window::define_graphs() {
+	graph(color_bubble, Func->bubble_time); 
+	graph(color_insertion, Func->insertion_time);
+	graph(color_heap, Func->pyramid_time); 
+	graph(color_quick, Func->quick_time);
+	graph(color_selection, Func->selection_time);
 }
 
 void plot_window::define_designination() {
@@ -100,8 +108,8 @@ void plot_window::define_designination() {
 
 	for (size_t j = 0; j < num_paramentres; j++)
 	{
-		unit_segment.setPosition(position_OX - 10 * size_delta_X_number, position_OY - (g.count + 1) * size_cells_height + size_delta_X_number);
-		unit_segment.setString(std::to_string(unit * (g.count + 1)));
+		unit_segment.setPosition(position_OX - 7 * size_delta_X_number, position_OY - (g.count + 1) * size_cells_height + size_delta_X_number);
+		unit_segment.setString((std::to_string(std::round((10000 * unit * (g.count + 1)) * pow(10, 3)) / pow(10, 3))).substr(0, 5));
 		g.texts.push_back(unit_segment);
 		g.count += 1;
 	} g.count = 0;
@@ -163,7 +171,6 @@ void plot_window::plot()
 
 	sf::RenderWindow window(sf::VideoMode(plotWidth, plotHeight), "PLOT", sf::Style::None);
 	window.setFramerateLimit(g.fps); 
-	sf::Vector2i window_pos(plotWidth/6, plotHeight/6);
 	window.setPosition(window_pos);
 	
 
@@ -173,12 +180,14 @@ void plot_window::plot()
 	define_unit_segments_line(); // ќпределение линий, подчеркивающих единичные отрезки
 	define_designination(); // ќпределение надписей, определ€ющих единичные отрезки
 	define_rectangle_inf(); // ќпределение окошка с информацией о сортировке
-	define_button_back();
+	define_button_back(); // ќпределение кнопки Back
+	define_graphs();
 	
 	float arrow_sprite_width_after = g.arrow_sprite.getScale().x * 1.1f;
 	float arrow_sprite_width_before = g.arrow_sprite.getScale().x;
 	float arrow_sprite_height_after = g.arrow_sprite.getScale().y * 1.1f;
 	float arrow_sprite_height_before = g.arrow_sprite.getScale().y;
+
 
 
 	while (window.isOpen()) { //√лавный цикл - заканчиваетс€, как только окно закрыто
@@ -188,7 +197,7 @@ void plot_window::plot()
 			switch (event_plot.type) {
 			case sf::Event::Closed:
 				window.close();
-				g.texts.clear(); g.circles.clear(); g.rectangles.clear();
+				g.texts.clear();  g.rectangles.clear();
 				break;
 			case sf::Event::MouseMoved:
 				if (is_there_cursor(g.arrow_sprite, mouse_pos)) {
@@ -200,23 +209,14 @@ void plot_window::plot()
 					g.arrow_sprite.setTexture(g.arrow_texture);
 					g.arrow_sprite.setScale(arrow_sprite_width_before, arrow_sprite_height_before);
 				}
-
-				if (g.isDragging) {
-					g.current_position = sf::Mouse::getPosition();
-					g.delta = g.current_position - g.start_position;
-					window.setPosition(window.getPosition() + g.delta);
-					g.start_position = g.current_position;
-				}
 				break;
 			case sf::Event::MouseButtonPressed:
 				if ((event_plot.mouseButton.button == sf::Mouse::Left)) {
 					if (is_there_cursor(g.arrow_sprite, mouse_pos)) {
-						window.close(); g.texts.clear(); g.rectangles.clear();
+						window.close(); g.texts.clear(); g.rectangles.clear(); g.circles.clear(); g.vertexes.clear();
 					}
 				}
 
-				g.isDragging = true;
-				g.start_position = sf::Mouse::getPosition();
 
 				break;
 			case sf::Event::MouseButtonReleased:
@@ -226,29 +226,21 @@ void plot_window::plot()
 			}
 		}
 		window.setActive();
+
 		window.clear(sf::Color::White);
 
 		window.draw(g.background_sprite);
 		window.draw(cells);
 		window.draw(axes);
+		window.draw(unit_segments);
 
-		graph(color_bubble, Func->bubble_time); window.draw(straight);
-		graph(color_insertion, Func->insertion_time); window.draw(straight);
-		graph(color_heap, Func->pyramid_time); window.draw(straight);
-		graph(color_quick, Func->quick_time); window.draw(straight);
-		graph(color_selection, Func->selection_time); window.draw(straight);
+		for (const auto& rec : g.rectangles) {	window.draw(rec);	} 
 
-		for (const auto& rec : g.rectangles) {
-			window.draw(rec);
-		}
+		for (const auto& text : g.texts) {	window.draw(text);	}
 
-		for (const auto& text : g.texts) {
-			window.draw(text);
-		}
+		for (const auto& vertex : g.vertexes) {	window.draw(vertex);	}
 
-		for (const auto& circle_sh : g.circles) {
-			window.draw(circle_sh);
-		}
+		for (const auto& circle_sh : g.circles) {	window.draw(circle_sh);	}
 
 		window.draw(g.arrow_sprite);
 

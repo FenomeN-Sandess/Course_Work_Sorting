@@ -11,10 +11,13 @@ private:
 	functions* Func;
 	global g;
 protected:
+	
+
 	sf::Color color_cells;
 	sf::Color color_axes;
 	unsigned int plotWidth = static_cast<unsigned int>(g.screenWidth * 0.7); 
 	unsigned int plotHeight = static_cast<unsigned int>(g.screenHeight * 0.7); 
+	sf::Vector2i window_pos;
 	std::string str_font = "JosefinSans-Bold.ttf"; 
 	std::string background_img = "backgroundPlot_6.jpg";
 	float size_delta_OX = plotWidth / 100.0f;
@@ -39,9 +42,9 @@ protected:
 	sf::Color color_insertion; sf::Color color_heap;
 	sf::Color color_quick; sf::Color color_selection;
 	sf::Color color_text_in; sf::Color color_arr_rec_outline = sf::Color::Transparent;
-	sf::Color color_arr_rec_theFill;
-	sf::Vector2f size_information;
+	sf::Color color_arr_rec_theFill; sf::Vector2f size_information;
 	unsigned int size_segments = static_cast<unsigned int>(plotWidth / 100.0f);
+
 	void graph(sf::Color& color, std::vector<std::vector<double>>& sort_time);
 	void define_designination();
 	void define_button_back();
@@ -54,6 +57,8 @@ protected:
 		float radius, float trickness, 
 		sf::Color color_outline, sf::Color theFill);
 	void information_in(sf::RectangleShape rectangle);
+	void define_graphs();
+
 
 public:
 	plot_window(functions* f) : Func(f), g(f), axes(sf::Lines, 4),
@@ -70,7 +75,8 @@ public:
 		color_selection(204, 204, 255),
 		color_insertion(255, 204, 255),
 		color_text_in(0, 0, 0),
-		color_arr_rec_theFill(255,255,255,80)
+		color_arr_rec_theFill(255,255,255,80),
+		window_pos(plotWidth / 6, plotHeight / 6)
 	{
 			g.download_font(g.font, str_font); // Подгрузка шрифта
 			g.download_backround(background_img, plotWidth, plotHeight); // Подгрузка фона

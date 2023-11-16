@@ -4,9 +4,9 @@
 
 
 
-
 int main()
 {
+	
 	bool restart = false;
 	functions Func; // объект класса functions
 	menu Menu(&Func); /*Объект менюшки*/
