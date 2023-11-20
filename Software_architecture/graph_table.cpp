@@ -6,7 +6,7 @@
 #include <cmath>
 
 void table_window::arrow() {
-	sf::Vector2f size_arrow_cell(size_cell_width * 2, size_cell_height);
+	sf::Vector2f size_arrow_cell(size_cell_width, size_cell_height);
 	sf::RectangleShape arrow_cell;
 	g.set_decoration_rectangle(arrow_cell, size_arrow_cell, size_cell_outline, color_cell_outline, color_cell_theFill);
 	arrow_cell.setPosition(0, 0);
@@ -14,8 +14,8 @@ void table_window::arrow() {
 
 	g.download_image(g.arrow_texture, g.arrow_img);
 	g.arrow_sprite.setTexture(g.arrow_texture);
-	g.arrow_sprite.setScale((static_cast<float>(arrow_cell.getSize().x) / g.arrow_texture.getSize().x) / 2.0f, // Определяем размеры спрайта под область окна
-		(static_cast<float>(arrow_cell.getSize().y /g.arrow_texture.getSize().y)) / 2.0f); // Из документации SFML: размер текстуры равен (1,1) - растягиваем текстуру на весь размер окна
+	g.arrow_sprite.setScale((static_cast<float>(arrow_cell.getSize().x) / g.arrow_texture.getSize().x) / 2.0f, 
+		(static_cast<float>(arrow_cell.getSize().y /g.arrow_texture.getSize().y)) / 2.0f);
 	define_center_position_area(g.arrow_sprite, arrow_cell);
 
 
@@ -33,13 +33,13 @@ void table_window::desctiption_title (sf::RectangleShape rectangle, std::string 
 
 }
 
-void table_window::cells(std::vector<std::vector<double>> sort_time, int number_row) {
-	for (size_t i = 1; i < num_columns; i++)
+void table_window::cells(std::vector<std::vector<double>> sort_time, int number_column) {
+	for (size_t i = 1; i < num_rows; i++)
 	{
 		sf::Vector2f size_cell(size_cell_width, size_cell_height);
 		sf::RectangleShape cell;
 		g.set_decoration_rectangle(cell, size_cell, size_cell_outline, color_cell_outline, color_cell_theFill);
-		cell.setPosition((i + 1) * size_cell.x, number_row*size_cell.y);
+		cell.setPosition(number_column * size_cell.x, i * size_cell.y);
 		g.rectangles.push_back(cell);
 		desctiption_title(cell, (std::to_string(std::round((10000 * sort_time[1][i - 1]) * pow(10, 3)) / pow(10, 3))).substr(0,5));
 
@@ -48,22 +48,24 @@ void table_window::cells(std::vector<std::vector<double>> sort_time, int number_
 
 void table_window::header()
 {
-	for (int i = 1; i < num_columns; i++) {
+	for (int i = 1; i < num_rows; i++) {
 		sf::RectangleShape cell;
-		sf::Vector2f size_cell_colomn(size_cell_width, size_cell_height);
-		g.set_decoration_rectangle(cell, size_cell_colomn, size_cell_outline, color_cell_outline, color_cell_theFill);
-		cell.setPosition((i+1) * size_cell_colomn.x, 0);
+		sf::Vector2f size_cell_row(size_cell_width, size_cell_height);
+
+		g.set_decoration_rectangle(cell, size_cell_row, size_cell_outline, color_cell_outline, color_cell_theFill);
+		cell.setPosition(0, i * size_cell_row.y);
 		std::string text_in = (std::to_string(names_column.at(i-1))); desctiption_title(cell, text_in);
 		g.rectangles.push_back(cell);
 
 	}
 
-	for (int i = 1; i < num_rows; i++) {
+	for (int i = 1; i < num_columns; i++) {
 
-		sf::Vector2f size_cell_row(size_cell_width * 2, size_cell_height);
 		sf::RectangleShape cell;
-		g.set_decoration_rectangle(cell, size_cell_row, size_cell_outline, color_cell_outline, color_cell_theFill);
-		cell.setPosition(0, size_cell_row.y * i);
+		sf::Vector2f size_cell_colomn(size_cell_width, size_cell_height);
+
+		g.set_decoration_rectangle(cell, size_cell_colomn, size_cell_outline, color_cell_outline, color_cell_theFill);
+		cell.setPosition(size_cell_colomn.x * i , 0);
 		desctiption_title(cell, names_sort.at(i-1));
 		g.rectangles.push_back(cell);
 

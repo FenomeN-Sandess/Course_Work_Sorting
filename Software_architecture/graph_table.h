@@ -8,17 +8,17 @@ private:
 	global g;
 	functions* Func;
 protected:
-	unsigned int windowTableWidth = static_cast<unsigned int>(g.screenWidth * 0.6);  
-	unsigned int windowTableHeight = static_cast<unsigned int>(g.screenHeight * 0.5); 
-	unsigned int num_columns = 12;
-	unsigned int num_rows = 6;
+	unsigned int windowTableWidth = static_cast<unsigned int>(g.screenWidth * 0.5);
+	unsigned int windowTableHeight = static_cast<unsigned int>(g.screenHeight * 0.8);
+	unsigned int num_columns = 6;
+	unsigned int num_rows = 12;
 	unsigned int size_title = static_cast<int>(windowTableWidth / 60);
 	float size_cell_outline = 1;
 	sf::Color color_cell_outline = sf::Color::Black;
 	sf::Color color_cell_theFill;
 	sf::Color color_title;
 	float size_cell_height = windowTableHeight / static_cast<float>(num_rows);
-	float size_cell_width = windowTableWidth / static_cast<float>(num_columns + 1);
+	float size_cell_width = windowTableWidth / static_cast<float>(num_columns);
 	std::vector <int> names_column = { 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 }; // Массив с набором параметров сложности
 
 	std::vector <std::string> names_sort = {"Bubble sort", "Heap sort",
